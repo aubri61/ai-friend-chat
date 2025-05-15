@@ -5,8 +5,8 @@ import { useChatPartnerStore } from "@/stores/useChatPartnerStore";
 import { ChatPartnerStyle } from "@/stores/useChatPartnerStore";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { HiOutlineGlobe } from "react-icons/hi";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
 
 export default function HomePage() {
   const { setPartner } = useChatPartnerStore();

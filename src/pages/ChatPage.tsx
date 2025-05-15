@@ -5,8 +5,16 @@ import { useChatStore } from "@/stores/useChatStore";
 import { useState, useRef, SyntheticEvent } from "react";
 import ChatItem from "@/components/ChatItem";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
+import LocaleSwitcher from "@/components/LocaleSwitcher";
+import { HiOutlineGlobe } from "react-icons/hi";
+import { useParams } from "next/navigation";
 
 export default function ChatPage() {
+  const t = useTranslations("ChatPage");
+  const { locale } = useParams() as { locale: string };
+  console.log("locale! ", locale);
+
   const { partner } = useChatPartnerStore();
   const { messages, addMessage } = useChatStore();
 
@@ -34,6 +42,7 @@ export default function ChatPage() {
         messages,
         newMessage: input,
         style: partner.style,
+        locale,
       }),
     })
       .then(async (res) => {
@@ -55,53 +64,24 @@ export default function ChatPage() {
     inputRef?.current?.focus();
   };
 
-  // const onChevronClick = () => {
-  //   setShowStyleDropdown(!showStyleDropdown);
-  // };
-
-  // const onStyleClick = () => {
-  //   setPartner({ style: partner.style === "cozy" ? "cheery" : "cozy" });
-
-  // };
-
   return (
-    <div className="h-dvh flex flex-col bg-white items-center">
+    <div className="h-dvh flex relative flex-col bg-white items-center">
       {/* Header */}
       <div className="pt-5 pb-4 border-b border-violet-100 flex justify-center items-center gap-2 relative select-none w-full">
         <span className="text-gray-700 text-[1.2rem] font-semibold">
-          {partner.style === "cozy" ? "편안한" : "쾌활한"} Momi
+          {partner.style === "cozy" ? t("cozy") : t("cheery")} Momi
         </span>
-        {/* {!showStyleDropdown ? (
-          <IoChevronDownOutline
-            className="cursor-pointer"
-            onClick={onChevronClick}
-          />
-        ) : (
-          <IoChevronUpOutline
-            className="cursor-pointer"
-            onClick={onChevronClick}
-          />
-        )}
-
-        {showStyleDropdown && (
-          <div className="absolute top-full -mt-1 bg-white border border-gray-200 shadow-xl rounded-2xl px-10 py-4 z-10">
-            <span
-              onClick={() => {
-                onStyleClick();
-              }}
-              className="text-gray-600 text-[1.1rem] hover:text-violet-500 hover:font-semibold cursor-pointer"
-            >
-              {partner.style === "cozy" ? "쾌활한 Momi" : "편안한 Momi"}
-            </span>
-          </div>
-        )} */}
+        <div className="absolute top-1/2  -translate-y-1/2 z-100 right-10 flex gap-1 justify-center items-center">
+          <HiOutlineGlobe />
+          <LocaleSwitcher />
+        </div>
       </div>
 
       {/* Chat Scrollable Area */}
       <div className="flex-1 overflow-y-auto px-6 sm:px-10 sm:max-w-[50rem] w-full pt-5 scroll-auto">
         <ChatItem
           role="model"
-          message="안녕, 나는 네 친구 Momi야. 오늘은 어떤 이야기를 하고 싶어?"
+          message={t("greeting")}
           partnerStyle={partner.style}
           delay
         />
@@ -126,9 +106,7 @@ export default function ChatPage() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage(e)}
           className="flex-1 border px-4 py-3 rounded-xl border-gray-300 outline-none"
-          placeholder={
-            loading ? "Momi가 열심히 답변하는 중..." : "메시지를 입력하세요"
-          }
+          placeholder={loading ? t("placeholder-wait") : t("placeholder")}
           disabled={loading}
         />
         <button
@@ -140,7 +118,7 @@ export default function ChatPage() {
             loading ? "bg-gray-400 text-gray-700" : " bg-violet-500 text-white"
           )}
         >
-          {loading ? "대기" : "전송"}
+          {loading ? t("wait") : t("send")}
         </button>
       </form>
     </div>
