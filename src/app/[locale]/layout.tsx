@@ -14,10 +14,9 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string }; //고침
 }) {
-  // Ensure that the incoming `locale` is valid
-  const { locale } = await params;
+  const { locale } = params; // await 제거
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
