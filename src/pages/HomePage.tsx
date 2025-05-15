@@ -4,8 +4,10 @@ import Image from "next/image";
 import { useChatPartnerStore } from "@/stores/useChatPartnerStore";
 import { ChatPartnerStyle } from "@/stores/useChatPartnerStore";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function HomePage() {
+  const t = useTranslations("HomePage");
   const { setPartner } = useChatPartnerStore();
 
   const router = useRouter();
@@ -17,6 +19,7 @@ export default function HomePage() {
 
   return (
     <div className="h-dvh bg-white flex justify-center items-center flex-col">
+      <h3>{t('title')}</h3>
       <h1 className="text-3xl text-gray-950">나만의 단짝 친구</h1>
       <h2 className="text-4xl font-bold text-violet-500 mt-5 mb-15">Momi</h2>
 
