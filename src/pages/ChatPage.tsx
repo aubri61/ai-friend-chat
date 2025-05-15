@@ -6,7 +6,7 @@ import { useState, useRef, SyntheticEvent } from "react";
 import ChatItem from "@/components/ChatItem";
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
-import LocaleSwitcher from "@/components/LocaleSwitcher";
+// import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { HiOutlineGlobe } from "react-icons/hi";
 // import { useParams } from "next/navigation";
 
@@ -72,7 +72,7 @@ export default function ChatPage() {
         </span>
         <div className="absolute top-1/2  -translate-y-1/2 z-100 right-10 flex gap-1 justify-center items-center">
           <HiOutlineGlobe />
-          <LocaleSwitcher />
+          {/* <LocaleSwitcher /> */}
         </div>
       </div>
 
