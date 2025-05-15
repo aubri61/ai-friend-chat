@@ -17,7 +17,7 @@ export default function ChatItem({
     <motion.div
       className={clsx(
         "flex  gap-1 mb-4 items-start mx-w-auto w-[90%]",
-        role === "ai" ? "justify-start" : "justify-end ml-auto"
+        role === "model" ? "justify-start" : "justify-end ml-auto"
       )}
       // className="flex w-auto gap-1 mb-4 items-start"
       initial={{ scale: 0.8, opacity: 0 }}
@@ -29,7 +29,7 @@ export default function ChatItem({
         delay: delay ? 0.5 : 0,
       }}
     >
-      {role === "ai" && (
+      {role === "model" && (
         <Image
           src={`/${partnerStyle}Profile.png`}
           width={200}
@@ -42,7 +42,7 @@ export default function ChatItem({
       <span
         className={clsx(
           "rounded-2xl px-4 py-2",
-          role === "ai" ? "bg-gray-50 text-gray-800" : "bg-violet-50 text-violet-950"
+          role === "model" ? "bg-gray-50 text-gray-800" : "bg-violet-50 text-violet-950"
         )}
       >
         {message}

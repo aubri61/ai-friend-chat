@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export interface ChatMessage {
-  role: "user" | "ai";
+  role: "user" | "model";
   content: string;
 }
 

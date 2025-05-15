@@ -33,6 +33,7 @@ export default function ChatPage() {
       body: JSON.stringify({
         messages,
         newMessage: input,
+        style: partner.style,
       }),
     })
       .then(async (res) => {
@@ -41,7 +42,7 @@ export default function ChatPage() {
         console.log("ai content: ", aiReply.content);
 
         if (aiReply.content) {
-          addMessage({ role: "ai", content: aiReply.content });
+          addMessage({ role: "model", content: aiReply.content });
         } else {
           throw new Error("no rely content");
         }
@@ -64,9 +65,9 @@ export default function ChatPage() {
   // };
 
   return (
-    <div className="h-dvh flex flex-col bg-white ">
+    <div className="h-dvh flex flex-col bg-white items-center">
       {/* Header */}
-      <div className="pt-5 pb-4 border-b border-violet-100 flex justify-center items-center gap-2 relative select-none">
+      <div className="pt-5 pb-4 border-b border-violet-100 flex justify-center items-center gap-2 relative select-none w-full">
         <span className="text-gray-700 text-[1.2rem] font-semibold">
           {partner.style === "cozy" ? "편안한" : "쾌활한"} Momi
         </span>
@@ -97,9 +98,9 @@ export default function ChatPage() {
       </div>
 
       {/* Chat Scrollable Area */}
-      <div className="flex-1 overflow-y-auto px-6 sm:px-10 pt-5 scrollbar-none scroll-auto">
+      <div className="flex-1 overflow-y-auto px-6 sm:px-10 sm:max-w-[50rem] w-full pt-5 scroll-auto">
         <ChatItem
-          role="ai"
+          role="model"
           message="안녕, 나는 네 친구 Momi야. 오늘은 어떤 이야기를 하고 싶어?"
           partnerStyle={partner.style}
           delay
@@ -118,13 +119,13 @@ export default function ChatPage() {
       </div>
 
       {/* Input Form */}
-      <form className="flex gap-2 px-6 sm:px-10 py-5">
+      <form className="flex gap-2 px-6 sm:px-10 py-5 mb-5 sm:max-w-[50rem] w-full">
         <input
           ref={inputRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage(e)}
-          className="flex-1 border px-4 py-2 rounded-xl border-gray-300 outline-none"
+          className="flex-1 border px-4 py-3 rounded-xl border-gray-300 outline-none"
           placeholder={
             loading ? "Momi가 열심히 답변하는 중..." : "메시지를 입력하세요"
           }
