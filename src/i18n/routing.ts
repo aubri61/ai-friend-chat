@@ -8,4 +8,4 @@ export const routing = defineRouting({
   defaultLocale: "kr",
 });
 
-export type Locale = (typeof routing.locales)[number]; // 'en' | 'ko'
+export type Locale = (typeof routing.locales)[number];

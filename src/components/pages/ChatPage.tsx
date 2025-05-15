@@ -41,7 +41,8 @@ export default function ChatPage() {
         messages,
         newMessage: input,
         style: partner.style,
-        locale,
+        locale: locale,
+        // locale: "en",
       }),
     })
       .then(async (res) => {

@@ -8,11 +8,11 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@google/genai": "^0.14.0",
-    "@google/generative-ai": "^0.24.1",
-    "@supabase/ssr": "^0.6.1",
-    "@supabase/supabase-js": "^2.49.4",
     "clsx": "^2.1.1",
     "framer-motion": "^12.11.4",
     "next": "15.3.2",
