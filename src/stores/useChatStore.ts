@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-interface ChatMessage {
+export interface ChatMessage {
   role: "user" | "ai";
   content: string;
 }

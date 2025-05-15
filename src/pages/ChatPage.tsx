@@ -5,9 +5,8 @@ import { useChatStore } from "@/stores/useChatStore";
 import { useState, useRef, SyntheticEvent } from "react";
 import ChatItem from "@/components/ChatItem";
 import clsx from "clsx";
-import { IoChevronDownOutline, IoChevronUpOutline } from "react-icons/io5";
 
-export default function ChatPage({ params }: { params?: {} }) {
+export default function ChatPage() {
   const { partner } = useChatPartnerStore();
   const { messages, addMessage } = useChatStore();
 
@@ -25,31 +24,31 @@ export default function ChatPage({ params }: { params?: {} }) {
     }
     if (!input.length) return;
     addMessage({ role: "user", content: input });
-    // setLoading(true);
+    setLoading(true);
     setInput("");
 
-    // await fetch("/api/chat", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     messages,
-    //     newMessage: input,
-    //   }),
-    // })
-    //   .then(async (res) => {
-    //     setLoading(false);
-    //     const aiReply = await res.json();
-    //     console.log("ai content: ", aiReply.content);
+    await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        messages,
+        newMessage: input,
+      }),
+    })
+      .then(async (res) => {
+        setLoading(false);
+        const aiReply = await res.json();
+        console.log("ai content: ", aiReply.content);
 
-    //     if (aiReply.content) {
-    //       addMessage({ role: "ai", content: aiReply.content });
-    //     } else {
-    //       throw new Error("no rely content");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log("err!", err);
-    //   });
+        if (aiReply.content) {
+          addMessage({ role: "ai", content: aiReply.content });
+        } else {
+          throw new Error("no rely content");
+        }
+      })
+      .catch((err) => {
+        console.log("err!", err);
+      });
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
 
     inputRef?.current?.focus();
