@@ -13,7 +13,6 @@ import { useParams } from "next/navigation";
 export default function ChatPage() {
   const t = useTranslations("ChatPage");
   const { locale } = useParams() as { locale: string };
-  console.log("locale! ", locale);
 
   const { partner } = useChatPartnerStore();
   const { messages, addMessage } = useChatStore();

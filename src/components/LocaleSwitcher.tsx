@@ -1,11 +1,12 @@
-'use client';
+"use client";
 
-import clsx from 'clsx';
-import { useParams } from 'next/navigation';
-import { Locale } from 'next-intl';
-import { useTransition, ChangeEvent } from 'react';
-import { usePathname, useRouter } from '@/i18n/navigation';
-import { routing } from '@/i18n/routing';
+import clsx from "clsx";
+import { useParams } from "next/navigation";
+import { Locale } from "next-intl";
+import { useTransition, ChangeEvent } from "react";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { routing } from "@/i18n/routing";
+import { useChatStore } from "@/stores/useChatStore";
 
 export default function LocaleSwitcher() {
   const router = useRouter();
@@ -13,10 +14,13 @@ export default function LocaleSwitcher() {
   const params = useParams();
   const [isPending, startTransition] = useTransition();
 
+  const { clearMessages } = useChatStore();
+
   function onSelectChange(event: ChangeEvent<HTMLSelectElement>) {
     const nextLocale = event.target.value as Locale;
 
     startTransition(() => {
+      clearMessages();
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
         // are used in combination with a given `pathname`.
@@ -29,8 +33,8 @@ export default function LocaleSwitcher() {
   return (
     <label
       className={clsx(
-        'relative text-gray-800',
-        isPending && 'transition-opacity [&:disabled]:opacity-30'
+        "relative text-gray-800",
+        isPending && "transition-opacity [&:disabled]:opacity-30"
       )}
     >
       <p className="sr-only">Select language</p>
