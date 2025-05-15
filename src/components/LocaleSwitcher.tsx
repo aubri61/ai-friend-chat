@@ -27,7 +27,7 @@ export default function LocaleSwitcher() {
         { pathname, params },
         { locale: nextLocale }
       );
-    });
+    });  
   }
 
   return (
