@@ -1,3 +1,9 @@
+import ChatPage from "@/pages/ChatPage";
+
 export default function Page({ params }: { params?: {} }) {
-  return <h1>My Page</h1>;
+  return (
+    <div>
+      <ChatPage />
+    </div>
+  );
 }
