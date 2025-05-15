@@ -14,9 +14,10 @@ export default async function LocaleLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string }; //고침
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = params; // await 제거
+  // Ensure that the incoming `locale` is valid
+  const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -24,11 +25,36 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale}>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );
 }
+
+// export default async function LocaleLayout({
+//   children,
+//   params,
+// }: {
+//   children: React.ReactNode;
+//   params: { locale: string }; //고침
+// }) {
+//   const { locale } = params; // await 제거
+//   if (!hasLocale(routing.locales, locale)) {
+//     notFound();
+//   }
+
+//   return (
+//     <html lang={locale}>
+//       <body>
+//         <NextIntlClientProvider locale={locale}>
+//           {children}
+//         </NextIntlClientProvider>
+//       </body>
+//     </html>
+//   );
+// }
 
 // export default function RootLayout({
 //   children,
