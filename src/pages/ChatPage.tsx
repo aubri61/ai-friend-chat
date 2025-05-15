@@ -8,11 +8,11 @@ import clsx from "clsx";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "@/components/LocaleSwitcher";
 import { HiOutlineGlobe } from "react-icons/hi";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 
 export default function ChatPage() {
   const t = useTranslations("ChatPage");
-  const { locale } = useParams() as { locale: string };
+  // const { locale } = useParams() as { locale: string };
 
   const { partner } = useChatPartnerStore();
   const { messages, addMessage } = useChatStore();
@@ -41,7 +41,7 @@ export default function ChatPage() {
         messages,
         newMessage: input,
         style: partner.style,
-        locale,
+        locale: "en",
       }),
     })
       .then(async (res) => {
