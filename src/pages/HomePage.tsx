@@ -5,7 +5,7 @@ import { useChatPartnerStore } from "@/stores/useChatPartnerStore";
 import { ChatPartnerStyle } from "@/stores/useChatPartnerStore";
 import { useRouter } from "next/navigation";
 
-export default function HomePage({ params }: { params?: {} }) {
+export default function HomePage() {
   const { setPartner } = useChatPartnerStore();
 
   const router = useRouter();
