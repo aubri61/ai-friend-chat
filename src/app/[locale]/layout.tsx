@@ -1,13 +1,7 @@
-import type { Metadata } from "next";
-import "./globals.css";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-
-export const metadata: Metadata = {
-  title: "AI Friend Chat",
-  description: "Chat with your AI Friend.",
-};
+import "./globals.css";
 
 export default async function LocaleLayout({
   children,
@@ -31,12 +25,19 @@ export default async function LocaleLayout({
   );
 }
 
+// import type { Metadata } from "next";
+// import "./globals.css";
+
+// export const metadata: Metadata = {
+//   title: "AI Friend Chat",
+//   description: "Chat with your AI Friend.",
+// };
+
 // export default function RootLayout({
 //   children,
 // }: Readonly<{
 //   children: React.ReactNode;
 // }>) {
-
 //   return (
 //     <html lang="en">
 //       <body className={`antialiased`}>{children}</body>

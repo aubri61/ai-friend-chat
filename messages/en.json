@@ -1,18 +1,6 @@
 {
   "HomePage": {
-    "only-me": "My best friend",
-    "choose": "Choose your Momi.",
-    "cozy-momi": "Cozy Momi",
-    "cheery-momi": "Cheery Momi"
-  },
-
-  "ChatPage": {
-    "cozy": "Cozy",
-    "cheery": "Cheery",
-    "greeting": "Hi, I'm your friend Momi. What would you like to talk about today?",
-    "send": "Send",
-    "wait": "Waiting",
-    "placeholder": "Type your message here",
-    "placeholder-wait": "Momi is working hard on a reply..."
+    "title": "Hello world!",
+    "about": "Go to the about page"
   }
 }
