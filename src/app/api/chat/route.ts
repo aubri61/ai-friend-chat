@@ -1,6 +1,13 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextRequest, NextResponse } from "next/server";
-import { SYSTEM_PROMPT_KR, COZY_PROMPT_KR, CHEERY_PROMPT_KR } from "@/lib/data";
+import {
+  SYSTEM_PROMPT_KR,
+  COZY_PROMPT_KR,
+  CHEERY_PROMPT_KR,
+  SYSTEM_PROMPT,
+  COZY_PROMPT,
+  CHEERY_PROMPT,
+} from "@/lib/data";
 
 import { ChatMessage } from "@/stores/useChatStore";
 
@@ -11,7 +18,7 @@ const ai = new GoogleGenAI({
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { messages, newMessage, style } = body;
+    const { messages, newMessage, style, locale } = body;
 
     const chat = ai.chats.create({
       model: "gemini-2.0-flash", //무료
@@ -21,9 +28,13 @@ export async function POST(req: NextRequest) {
           parts: [
             {
               text:
-                SYSTEM_PROMPT_KR + style === "cozy"
-                  ? COZY_PROMPT_KR
-                  : CHEERY_PROMPT_KR,
+                locale === "kr"
+                  ? SYSTEM_PROMPT_KR + style === "cozy"
+                    ? COZY_PROMPT_KR
+                    : CHEERY_PROMPT_KR
+                  : SYSTEM_PROMPT + style === "cozy"
+                  ? COZY_PROMPT
+                  : CHEERY_PROMPT,
             },
           ],
         },
@@ -39,7 +50,7 @@ export async function POST(req: NextRequest) {
     });
 
     const result = await chat.sendMessage({
-      message: newMessage + "반말로 답해.",
+      message: newMessage + locale === "kr" ? "반말로 답해." : "let's just chat. you're my close friend.",
     });
 
     return NextResponse.json({
