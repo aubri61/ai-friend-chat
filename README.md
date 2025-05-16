@@ -7,6 +7,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 [Momi와 대화하기](https://ai-friend-chat.vercel.app/)
 
-<img src="https://github.com/user-attachments/assets/bced4536-e4ca-46cb-aade-cb89798105e0"  width="200" height="400"/>
+<img src="https://github.com/user-attachments/assets/bced4536-e4ca-46cb-aade-cb89798105e0"  width="400" height="680"/>
 
 <!-- ![모미](https://github.com/user-attachments/assets/bced4536-e4ca-46cb-aade-cb89798105e0) -->
